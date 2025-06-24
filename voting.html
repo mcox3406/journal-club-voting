@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote on Topics - Journal Club</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">← Back to Home</a>
+                <a href="results.html" class="nav-link">View Results →</a>
+            </div>
+            
+            <h1>Rate the Topics</h1>
+            <div class="progress">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p id="progress-text" class="subtitle">0 of 36 topics rated</p>
+            
+            <div id="topics-container"></div>
+            
+            <button class="btn" id="submit-btn" onclick="submitVotes()" disabled>Submit Votes</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module" src="firebase-config.js"></script>
+    <script src="topics.js"></script>
+    <script src="voting.js"></script>
+</body>
+</html> 

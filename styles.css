@@ -347,3 +347,141 @@ input[type="radio"] {
     align-items: center;
     margin-top: 15px;
 }
+
+/* Navigation styles */
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.nav-link {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: #e7f3ff;
+    color: #2980b9;
+}
+
+.page-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.page-links .btn {
+    margin: 0;
+}
+
+/* Histogram styles */
+.histogram {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.histogram-title {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.histogram-chart {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 150px;
+    margin: 15px 0;
+    padding: 0 10px;
+    border-bottom: 2px solid #ecf0f1;
+    position: relative;
+}
+
+.histogram-bar {
+    background: linear-gradient(to top, #3498db, #5dade2);
+    border: 1px solid #000;
+    border-radius: 0;
+    width: 40px;
+    min-height: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+    margin: 0;
+}
+
+.histogram-bar:hover {
+    background: linear-gradient(to top, #2980b9, #3498db);
+    transform: translateY(-2px);
+}
+
+.histogram-bar-label {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    color: #7f8c8d;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.histogram-bar-value {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #2c3e50;
+    font-weight: 600;
+    background: white;
+    padding: 1px 3px;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.histogram-axis-label {
+    text-align: center;
+    margin-top: 20px;
+    color: #7f8c8d;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.histogram-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #ecf0f1;
+    font-size: 13px;
+}
+
+.histogram-stat {
+    text-align: center;
+}
+
+.histogram-stat-value {
+    display: block;
+    font-weight: 600;
+    color: #3498db;
+    font-size: 15px;
+}
+
+.histogram-stat-label {
+    color: #7f8c8d;
+    font-size: 11px;
+}

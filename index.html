@@ -8,83 +8,47 @@
 </head>
 <body>
     <div class="container">
-        <!-- Landing Page -->
-        <div id="landing-page" class="page active">
-            <div class="card">
-                <h1>🧪 Journal Club Voting</h1>
-                <p class="subtitle">Help us choose the most interesting topics for our upcoming journal club sessions!</p>
-                
-                <div class="instructions">
-                    <h3>How it works:</h3>
-                    <p>Rate each topic from 1-5 based on your interest level, or select "Unsure" if you're not familiar with the topic. Your votes will be combined with others to create a ranked list of the most popular topics.</p>
-                </div>
-                
-                <div class="vote-legend">
-                    <div class="legend-item">
-                        <div class="legend-score">1</div>
-                        <div>Not Interested</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-score">2</div>
-                        <div>Slightly Interested</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-score">3</div>
-                        <div>Moderately Interested</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-score">4</div>
-                        <div>Very Interested</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-score">5</div>
-                        <div>Extremely Interested</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-score">0</div>
-                        <div>Unsure</div>
-                    </div>
-                </div>
-                
-                <button class="btn" onclick="startVoting()">Start Voting</button>
+        <div class="card">
+            <h1>Journal Club Voting</h1>
+            <p class="subtitle">Help us choose the most interesting topics for our upcoming journal club sessions!</p>
+            
+            <div class="instructions">
+                <h3>How it works:</h3>
+                <p>Rate each topic from 1-5 based on your interest level, or select "Unsure" if you're not familiar with the topic. Your votes will be combined with others to create a ranked list of the most popular topics.</p>
             </div>
-        </div>
-        
-        <!-- Voting Page -->
-        <div id="voting-page" class="page">
-            <div class="card">
-                <h1>Rate the Topics</h1>
-                <div class="progress">
-                    <div class="progress-bar" id="progress-bar"></div>
+            
+            <div class="vote-legend">
+                <div class="legend-item">
+                    <div class="legend-score">1</div>
+                    <div>Not Interested</div>
                 </div>
-                <p id="progress-text" class="subtitle">0 of 36 topics rated</p>
-                
-                <div id="topics-container"></div>
-                
-                <button class="btn" id="submit-btn" onclick="submitVotes()" disabled>Submit Votes</button>
+                <div class="legend-item">
+                    <div class="legend-score">2</div>
+                    <div>Slightly Interested</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-score">3</div>
+                    <div>Moderately Interested</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-score">4</div>
+                    <div>Very Interested</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-score">5</div>
+                    <div>Extremely Interested</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-score">0</div>
+                    <div>Unsure</div>
+                </div>
             </div>
-        </div>
-        
-        <!-- Results Page -->
-        <div id="results-page" class="page">
-            <div class="card">
-                <h1>📊 Voting Results</h1>
-                <p class="subtitle">Topics ranked by average interest score</p>
-                
-                <div id="results-container">
-                    <div class="loading">Loading results...</div>
-                </div>
-                
-                <button class="btn" onclick="goToVoting()">Vote Again</button>
+            
+            <div class="page-links">
+                <a href="voting.html" class="btn">Start Voting</a>
+                <a href="results.html" class="btn btn-secondary">View Results</a>
             </div>
         </div>
     </div>
-
-    <!-- Firebase SDKs -->
-    <script type="module" src="firebase-config.js"></script>
-
-    <script src="topics.js"></script>
-    
-    <script src="app.js"></script>
 </body>
 </html>
