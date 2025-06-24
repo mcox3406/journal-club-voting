@@ -218,152 +218,126 @@ input[type="radio"] {
     color: #3498db;
 }
 
-/* Comment Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-    background-color: white;
-    margin: 10% auto;
-    padding: 0;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-
-.modal-header {
+/* Comment Box Styles */
+.comment-box {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid #ecf0f1;
-}
-
-.modal-header h3 {
-    margin: 0;
-    color: #2c3e50;
-}
-
-.close {
-    font-size: 24px;
-    font-weight: bold;
+    gap: 5px;
     cursor: pointer;
-    color: #7f8c8d;
-    transition: color 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    color: #856404;
+    font-weight: 500;
 }
 
-.close:hover {
-    color: #2c3e50;
+.comment-box:hover {
+    background: #ffeaa7;
+    border-color: #fdcb6e;
 }
 
-.modal-body {
-    padding: 20px;
+.comment-box.active {
+    background: #ffc107;
+    color: white;
+    border-color: #e17055;
 }
 
-.modal-body textarea {
+.comment-input-container {
+    margin-top: 10px;
+    display: none;
+}
+
+.comment-input-container.active {
+    display: block;
+}
+
+.comment-input {
     width: 100%;
-    padding: 12px;
-    border: 2px solid #ecf0f1;
+    padding: 10px;
+    border: 2px solid #ffc107;
     border-radius: 8px;
-    font-family: inherit;
     font-size: 14px;
+    font-family: inherit;
     resize: vertical;
-    margin: 15px 0;
-    transition: border-color 0.3s ease;
+    min-height: 60px;
 }
 
-.modal-body textarea:focus {
+.comment-input:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: #e17055;
 }
 
-.modal-actions {
+.comment-actions {
     display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 20px;
+    gap: 8px;
+    margin-top: 8px;
 }
 
-.btn-secondary {
+.comment-save, .comment-cancel {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.comment-save {
+    background: #27ae60;
+    color: white;
+}
+
+.comment-save:hover {
+    background: #219a52;
+}
+
+.comment-cancel {
     background: #ecf0f1;
     color: #2c3e50;
 }
 
-.btn-secondary:hover {
+.comment-cancel:hover {
     background: #bdc3c7;
 }
 
-/* Comment Button */
-.comment-btn {
-    background: #f8f9fa;
-    border: 1px solid #dee2e6;
-    color: #6c757d;
-    padding: 6px 12px;
+/* Comments Section at Bottom */
+.all-comments-section {
+    margin-top: 30px;
+    padding: 25px;
+    background: white;
     border-radius: 15px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: all 0.3s ease;
-    margin-left: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.comment-btn:hover {
-    background: #e9ecef;
-    color: #495057;
+.all-comments-title {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    text-align: center;
 }
 
-.comment-btn.has-comment {
-    background: #e7f3ff;
-    color: #3498db;
-    border-color: #3498db;
-}
-
-/* Comments Display */
-.comments-section {
-    margin-top: 10px;
+.topic-comment {
+    margin-bottom: 20px;
     padding: 15px;
     background: #f8f9fa;
-    border-radius: 8px;
-    border-left: 4px solid #3498db;
+    border-radius: 10px;
+    border-left: 4px solid #ffc107;
 }
 
-.comments-header {
+.topic-comment-title {
     font-weight: 600;
     color: #2c3e50;
-    margin-bottom: 10px;
-    font-size: 0.9em;
-}
-
-.comment-item {
-    background: white;
-    padding: 12px;
     margin-bottom: 8px;
-    border-radius: 6px;
-    font-size: 0.9em;
-    border: 1px solid #e9ecef;
+    font-size: 1.1em;
 }
 
-.comment-item:last-child {
-    margin-bottom: 0;
-}
-
-.comment-text {
-    color: #2c3e50;
-    line-height: 1.4;
-}
-
-.comment-meta {
-    color: #6c757d;
-    font-size: 0.8em;
-    margin-top: 5px;
+.topic-comment-text {
+    color: #495057;
+    line-height: 1.5;
+    font-style: italic;
 }
 
 /* Topic actions row */

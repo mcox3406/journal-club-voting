@@ -25,18 +25,23 @@ function renderTopics() {
         topicDiv.className = 'topic-item';
         topicDiv.innerHTML = `
             <div class="topic-title">${topic}</div>
-            <div class="topic-actions">
-                <div class="voting-options">
-                    ${[1, 2, 3, 4, 5, 0].map(score => `
-                        <label class="vote-option" data-topic="${index}" data-score="${score}">
-                            <input type="radio" name="topic-${index}" value="${score}" onchange="recordVote(${index}, ${score})">
-                            <span>${score === 0 ? 'Unsure' : score}</span>
-                        </label>
-                    `).join('')}
-                </div>
-                <button class="comment-btn" onclick="openCommentModal(${index})" id="comment-btn-${index}">
+            <div class="voting-options">
+                ${[1, 2, 3, 4, 5, 0].map(score => `
+                    <label class="vote-option" data-topic="${index}" data-score="${score}">
+                        <input type="radio" name="topic-${index}" value="${score}" onchange="recordVote(${index}, ${score})">
+                        <span>${score === 0 ? 'Unsure' : score}</span>
+                    </label>
+                `).join('')}
+                <div class="comment-box" onclick="toggleComment(${index})" id="comment-box-${index}">
                     💬 Comment
-                </button>
+                </div>
+            </div>
+            <div class="comment-input-container" id="comment-container-${index}">
+                <textarea class="comment-input" id="comment-input-${index}" placeholder="Share your thoughts about this topic..."></textarea>
+                <div class="comment-actions">
+                    <button class="comment-save" onclick="saveComment(${index})">Save</button>
+                    <button class="comment-cancel" onclick="cancelComment(${index})">Cancel</button>
+                </div>
             </div>
         `;
         container.appendChild(topicDiv);
@@ -160,7 +165,6 @@ async function loadResults() {
                         <th>Topic</th>
                         <th>Average Score</th>
                         <th>Vote Count</th>
-                        <th>Comments</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -170,32 +174,19 @@ async function loadResults() {
                         else if (result.rawAverage >= 3) scoreClass = 'score-medium';
                         else if (result.rawAverage > 0) scoreClass = 'score-low';
                         
-                        const commentsHtml = result.comments.length > 0 ? `
-                            <div class="comments-section">
-                                <div class="comments-header">${result.comments.length} comment${result.comments.length !== 1 ? 's' : ''}:</div>
-                                ${result.comments.map(comment => `
-                                    <div class="comment-item">
-                                        <div class="comment-text">${comment.text}</div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        ` : '';
-                        
                         return `
                             <tr class="${scoreClass}">
                                 <td>${index + 1}</td>
-                                <td>
-                                    ${result.topic}
-                                    ${commentsHtml}
-                                </td>
+                                <td>${result.topic}</td>
                                 <td>${result.average}</td>
                                 <td>${result.voteCount}</td>
-                                <td>${result.comments.length}</td>
                             </tr>
                         `;
                     }).join('')}
                 </tbody>
             </table>
+            
+            ${renderAllComments(results)}
         `;
 
     } catch (error) {
@@ -237,46 +228,71 @@ if (window.location.hash === '#results') {
     loadResults();
 }
 
-// Comment modal functions
-function openCommentModal(topicIndex) {
-    currentCommentTopic = topicIndex;
-    document.getElementById('comment-topic-title').textContent = topics[topicIndex];
-    document.getElementById('comment-text').value = comments[topicIndex] || '';
-    document.getElementById('comment-modal').style.display = 'block';
-}
-
-function closeCommentModal() {
-    document.getElementById('comment-modal').style.display = 'none';
-    currentCommentTopic = null;
-    document.getElementById('comment-text').value = '';
-}
-
-function submitComment() {
-    const commentText = document.getElementById('comment-text').value.trim();
+// Comment functions
+function toggleComment(topicIndex) {
+    const container = document.getElementById(`comment-container-${topicIndex}`);
+    const commentBox = document.getElementById(`comment-box-${topicIndex}`);
+    const input = document.getElementById(`comment-input-${topicIndex}`);
     
-    if (currentCommentTopic !== null) {
-        if (commentText) {
-            comments[currentCommentTopic] = commentText;
-            // Update button appearance
-            const commentBtn = document.getElementById(`comment-btn-${currentCommentTopic}`);
-            commentBtn.classList.add('has-comment');
-            commentBtn.textContent = '💬 Edit Comment';
-        } else {
-            // Remove comment if text is empty
-            delete comments[currentCommentTopic];
-            const commentBtn = document.getElementById(`comment-btn-${currentCommentTopic}`);
-            commentBtn.classList.remove('has-comment');
-            commentBtn.textContent = '💬 Comment';
-        }
-        
-        closeCommentModal();
+    if (container.classList.contains('active')) {
+        container.classList.remove('active');
+        commentBox.classList.remove('active');
+    } else {
+        container.classList.add('active');
+        commentBox.classList.add('active');
+        input.value = comments[topicIndex] || '';
+        input.focus();
     }
 }
 
-// Close modal when clicking outside of it
-window.onclick = function(event) {
-    const modal = document.getElementById('comment-modal');
-    if (event.target === modal) {
-        closeCommentModal();
+function saveComment(topicIndex) {
+    const input = document.getElementById(`comment-input-${topicIndex}`);
+    const commentText = input.value.trim();
+    const container = document.getElementById(`comment-container-${topicIndex}`);
+    const commentBox = document.getElementById(`comment-box-${topicIndex}`);
+    
+    if (commentText) {
+        comments[topicIndex] = commentText;
+        commentBox.textContent = '💬 Edit Comment';
+        commentBox.style.background = '#ffc107';
+        commentBox.style.color = 'white';
+    } else {
+        delete comments[topicIndex];
+        commentBox.textContent = '💬 Comment';
+        commentBox.style.background = '#fff3cd';
+        commentBox.style.color = '#856404';
     }
+    
+    container.classList.remove('active');
+    commentBox.classList.remove('active');
+}
+
+function cancelComment(topicIndex) {
+    const container = document.getElementById(`comment-container-${topicIndex}`);
+    const commentBox = document.getElementById(`comment-box-${topicIndex}`);
+    
+    container.classList.remove('active');
+    commentBox.classList.remove('active');
+}
+
+function renderAllComments(results) {
+    const allComments = results.filter(result => result.comments.length > 0);
+    
+    if (allComments.length === 0) {
+        return '';
+    }
+    
+    return `
+        <div class="all-comments-section">
+            <h2 class="all-comments-title">💭 All Comments</h2>
+            ${allComments.map(result => `
+                <div class="topic-comment">
+                    <div class="topic-comment-title">${result.topic}</div>
+                    ${result.comments.map(comment => `
+                        <div class="topic-comment-text">"${comment.text}"</div>
+                    `).join('')}
+                </div>
+            `).join('')}
+        </div>
+    `;
 }
